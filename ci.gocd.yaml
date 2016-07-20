@@ -31,7 +31,7 @@ pipelines:
         # type is optional here, material type is implied based on presence of pipeline and stage fields
         # type: dependency
         pipeline: yamlpipe1
-        stage: test
+        stage: build
     stages: # list of stages in order
       - build: # name of stage
           clean_workspace: true
