@@ -10,14 +10,22 @@ pipelines:
     materials:
       mygit:  # this is the name of material
         # says about type of material and url at once
-        git: http://my.example.org/mygit.git
+        git: git@github.com:tomzo/gocd-yaml-config-example.git
     stages:
       - build: # name of stage
           jobs:
             build: # name of the job
+              elastic_profile_id: w.c2.m2048.e30
+              environment_variables:
+                EMPTY_ENV:
               tasks:
+               - exec:
+                   command: bash
+                   arguments:
+                    - -c
+                    - env
                - exec: # indicates type of task
-                   command: make
+                   command: true
   "yaml-example": # definition of yaml-example pipeline
     group: yaml-example
     label_template: "${mygit[:8]}"
@@ -25,20 +33,21 @@ pipelines:
     materials:
       mygit: # this is the name of material
         # keyword git says about type of material and url at once
-        git: http://my.example.org/mygit.git
-        branch: ci
+        git: git@github.com:tomzo/gocd-yaml-config-example.git
+        branch: empty-var
       upstream:
         # type is optional here, material type is implied based on presence of pipeline and stage fields
         # type: dependency
         pipeline: yamlpipe1
         stage: build
+    environment_variables:
+      EMPTY_ENV:
     stages: # list of stages in order
       - build: # name of stage
           clean_workspace: true
           jobs:
             csharp: # name of the job
-              resources:
-               - net45
+              elastic_profile_id: w.c2.m2048.e30
               artifacts:
                - build:
                    source: bin/
@@ -55,7 +64,8 @@ pipelines:
                    job: build
                    source: test-bin/
                    destination: bin/
-               - exec: # indicates type of task
-                   command: make
+               - exec:
+                   command: bash
                    arguments:
-                    - "VERBOSE=true"
+                    - -c
+                    - env
