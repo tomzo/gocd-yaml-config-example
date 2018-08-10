@@ -58,4 +58,4 @@ pipelines:
                - exec: # indicates type of task
                    command: make
                    arguments:
-                    - "VERBOSE=true"
+                    - "VERBOSE=true" 
