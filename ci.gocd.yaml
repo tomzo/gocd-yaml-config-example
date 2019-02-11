@@ -32,6 +32,10 @@ pipelines:
         # type: dependency
         pipeline: yamlpipe1
         stage: build
+    environment_variables:
+      DUMMY: "Tigers"
+    secure_variables:
+      MYSECRET: ""
     stages: # list of stages in order
       - build: # name of stage
           clean_workspace: true
@@ -56,6 +60,7 @@ pipelines:
                    source: test-bin/
                    destination: bin/
                - exec: # indicates type of task
-                   command: make
+                   command: bash
                    arguments:
-                    - "VERBOSE=true"
+                    - -c
+                    - "echo ${MYSECRET}"
