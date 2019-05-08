@@ -1,9 +1,15 @@
+format_version: 4
 pipelines:
   yamlpipe1:
     group: simple
     materials:
       mygit:
-        type: configrepo
+        plugin_configuration:
+          id: GitPathMaterial
+          version: 1
+        options:
+          url: /host
+          branch: master
     stages:
       - build: # name of stage
           jobs:
