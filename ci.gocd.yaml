@@ -1,3 +1,4 @@
+format_version: 9
 environments:
   example:
     environment_variables:
@@ -11,6 +12,8 @@ pipelines:
       mygit:  # this is the name of material
         # says about type of material and url at once
         git: http://my.example.org/mygit.git
+        whitelist:
+          - README.md
     stages:
       - build: # name of stage
           jobs:
@@ -27,6 +30,8 @@ pipelines:
         # keyword git says about type of material and url at once
         git: http://my.example.org/mygit.git
         branch: ci
+        blacklist:
+          - Dojofile
       upstream:
         # type is optional here, material type is implied based on presence of pipeline and stage fields
         # type: dependency
